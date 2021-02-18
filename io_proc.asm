@@ -1,14 +1,11 @@
-TITLE Designing Low Level I/O Procedures     (program6_onid.asm)
+TITLE Designing Low Level I/O Procedures
 
 ; Author: Lindsay Goins
 ; Last Modified: 3/15/20
-; OSU email address: goinsli@oregonstate.edu
-; Course number/section: CS271-400
-; Project Number: Project 6                Due Date: 3/15/20
 ; Description: This program introduces the program and programmer and instructs the user to enter 10 signed integers. It then receives
-; those values as strings and converts them to integers. *After this step, the program does not work.* Next, it calculates their sum 
+; those values as strings and converts them to integers. Next, it calculates their sum 
 ; and average. It then converts those integers back to strings and prints them for the user to see. Lastly, the program wishes 
-; the user goodbye and a happy spring break!
+; the user goodbye.
 
 INCLUDE Irvine32.inc
 
@@ -55,7 +52,7 @@ error_msg		BYTE	"Error! You did not enter a signed number or your number did not
 array_msg		BYTE	"You entered the following numbers: ",0
 sum_msg			BYTE	"The sum of your numbers is: ",0
 avg_msg			BYTE	"The rounded average is: ",0
-good_bye		BYTE	"Thank you for using my final program! I hope you have a great break! See ya later! :)",0
+good_bye		BYTE	"Thank you for using my program! I hope you have a great day!",0
 user_num		BYTE	11 DUP(0)
 char_length		BYTE	?
 array			SDWORD	10 DUP(?)
@@ -153,8 +150,8 @@ FillArray:
 	push	[ebp + 36]
 	call	readVal
 	
-	;mov		eax, [ebp + 52]						;tried to debug this for hours, but couldn't figure out how to fill array correctly
-	;mov		[esi], eax							;this is because the memory location was not actually holding the integer from readVal
+	;mov		eax, [ebp + 52]						
+	;mov		[esi], eax							
 	;add		esi, 4
 	loop	FillArray
 
@@ -217,7 +214,7 @@ ValidLoop:
 	jo		ErrorMsg								;if the number doesn't fit in a 32-bit register
 	loop	ValidLoop
 	
-	mov		edi, [ebp + 52]							;I couldn't get the memory location to hold the integer from my string conversion
+	mov		edi, [ebp + 52]							
 	mov		[edi], eax
 	jmp		EndRet
 
@@ -257,7 +254,7 @@ NegValidLoop:
 	mov		ebx, -1									;negate the number if it is negative
 	imul	ebx
 
-	mov		edi, [ebp + 52]							;I couldn't get the memory location to hold the integer from my string conversion
+	mov		edi, [ebp + 52]							
 	mov		[edi], eax
 	jmp		EndRet
 
@@ -297,7 +294,7 @@ SumLoop:
 
 ;Calculates the average of the values in the array
 	;mov		ebx, [ebp + 40]
-	;idiv	ebx										;was throwing an exception, but I couldn't get array to work to ever calculate anything
+	;idiv	ebx										
 	;mov		[ebp + 48], eax
 
 	popad
